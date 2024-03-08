@@ -2,8 +2,22 @@ from tkinter import *
 from tkinter import ttk
 from googletrans import LANGUAGES,Translator
 
+def change(text="type",src="English",dest="Hindi"):
+    text1=text
+    src1=src
+    dest1=dest
+    trans=Translator()
+    trans1=trans.translate(text,src=src1,dest=dest1)
+    return trans1.text
 
-
+def data_get():
+    s=comb_sor.get()
+    d=comb_dest.get()
+    msg=Sor_txt.get(1.0,END)
+    text_get=change(msg,s,d)
+    dest_txt.delete(1.0,END)
+    dest_txt.insert(END,text_get)
+    
 
 
 
@@ -36,13 +50,13 @@ comb_sor=ttk.Combobox(frame,value=list_text)
 comb_sor.place(x=370,y=130,height=20,width=120)
 comb_sor.set("english")
 
-button_change=Button(frame,text="translate",relief=RAISED)
+button_change=Button(frame,text="translate",relief=RAISED,command=data_get)
 button_change.place(x=180,y=280,height=40,width=140)
 
 
 comb_dest=ttk.Combobox(frame,value=list_text)
 comb_dest.place(x=370,y=410,height=20,width=120)
-comb_dest.set("english")
+comb_dest.set("hindi")
 
 dest_txt=Label(root,text="Translation",font=("Time New Roman",20),fg="black",bg="light blue")
 dest_txt.place(x=-70,y=400,height=40,width=290)
