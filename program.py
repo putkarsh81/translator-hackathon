@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
-
+import gtts
+import playsound
 
 
 from googletrans import LANGUAGES,Translator
@@ -21,6 +22,7 @@ def data_get():
     text_get=change(msg,s,d)
     dest_txt.delete(1.0,END)
     dest_txt.insert(END,text_get)
+
 
 
 
@@ -84,6 +86,13 @@ dest_txt.place(x=-70,y=400,height=40,width=290)
 
 dest_txt=Text(frame,font=("Time New Roman",10),wrap=WORD)
 dest_txt.place(x=10,y=440,height=100,width=480)
+def speech():
+    text=dest_txt.get(1.0,END)
+    sound=gtts.gTTS(text,lang="hi")
+    sound.save("sound.mp3")
+    playsound.playsound("sound.mp3")
+
+
 
 def on_enter(event):
     button_speech.config(bg="pink") 
@@ -91,11 +100,10 @@ def on_enter(event):
 def on_leave(event):
     button_speech.config(bg="SystemButtonFace")
 
-button_speech=Button(frame,text="Speak to Enter",relief=tk.SOLID)
+button_speech=Button(frame,text="Click to hear",relief=tk.SOLID,command=speech)
 button_speech.place(x=180,y=580,height=40,width=140)
 button_speech.bind("<Enter>",on_enter)
 button_speech.bind("<Leave>",on_leave)
-
 
 
 root.mainloop()
